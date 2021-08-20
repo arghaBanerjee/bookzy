@@ -1,0 +1,45 @@
+databaseChangeLog:
+  -  changeSet:
+       id:  1
+       author:  bookzy
+       changes:
+         -  createTable:
+              tableName:  user
+              columns:
+                -  column:
+                     name:  id
+                     type:  bigint
+                     autoIncrement:  true
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                -  column:
+                     name:  first_name
+                     type:  varchar(50)
+                     constraints:
+                       nullable: true
+                -  column:
+                     name:  last_name
+                     type:  varchar(50)
+                     constraints:
+                       nullable:  true
+                -  column:
+                     name:  username
+                     type:  varchar(50)
+                     constraints:
+                       nullable: false
+
+  - changeSet:
+      id: 2
+      author: bookzy
+      preConditions:
+        onFail: MARK_RAN
+        dbms:
+          type: h2
+        sqlCheck:
+          expectedResult: 0
+          sql: select count(*) from user
+      changes:
+        - sqlFile:
+            comment: script to populate user table
+            path: db/changelog/scripts/user-populate.sql
