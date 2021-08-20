@@ -25,3 +25,8 @@ hs_err_pid*
 # ignore intellij files
 .DS_Store
 .idea
+.classpath
+.project
+.settings/
+target/
+*.iml
